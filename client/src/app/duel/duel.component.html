@@ -1,0 +1,68 @@
+<div style="display: flex; flex-direction: column; align-items: center; margin-top: 20vh;">
+  <div style="display: flex; flex-direction: row; justify-content: space-between;">
+    <app-text-input (usernameChange)="receiveUsernameOne($event)" style="margin-right: 100px;"></app-text-input>
+    <app-text-input (usernameChange)="receiveUsernameTwo($event)"></app-text-input>
+  </div>
+  <br />
+  <br />
+  <button class="submit-button" (click)="onSubmit()">Duel</button>
+
+  <div *ngIf="error">{{ error }}</div>
+
+  <h2 *ngIf="duelResult" class="winner-entry">Winner: {{ duelResult.winner }}</h2>
+
+    <div style="display: flex; flex-direction: row;">
+
+    <!-- First user profile -->
+    <div class="profile-container" *ngIf="duelResult && duelResult.user1" [ngClass]="{'winner-profile': duelResult && duelResult.winner === duelResult.user1.username}">
+      <div class="left-column">
+        <img [src]="duelResult.user1.avatar_url" alt="User Avatar" class="avatar" />
+        <p class="bio">{{ duelResult.user1.bio }}</p>
+      </div>
+      <div class="right-column">
+        <ul>
+          <li><strong>Username:</strong> {{ duelResult.user1.username }}</li>
+          <li><strong>Name:</strong> {{ duelResult.user1.name }}</li>
+          <li><strong>Location:</strong> {{ duelResult.user1.location || 'Not specified' }}</li>
+          <li><strong>Titles:</strong> {{ duelResult.user1.titles?.join(', ') || 'None' }}</li>
+          <li><strong>Favorite Language:</strong> {{ duelResult.user1['favorite-language'] || 'Not specified' }}</li>
+          <li><strong>Total Stars:</strong> {{ duelResult.user1['total-stars'] }}</li>
+          <li><strong>Highest Star Count:</strong> {{ duelResult.user1['highest-starred'] }}</li>
+          <li [ngClass]="{'winner-entry': duelResult && duelResult.winner === duelResult.user1.username, 'other-entry': duelResult && duelResult.winner !== duelResult.user1.username}">
+            <strong>Public Repositories:</strong> {{ duelResult.user1['public-repos'] || 0 }}</li>
+          <li><strong>Perfect Repositories:</strong> {{ duelResult.user1['perfect-repos'] }}</li>
+          <li><strong>Followers:</strong> {{ duelResult.user1.followers }}</li>
+          <li><strong>Following:</strong> {{ duelResult.user1.following }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin: 0 20px;"></div>
+
+    <!-- Second user profile -->
+    <div class="profile-container" *ngIf="duelResult && duelResult.user2" [ngClass]="{'winner-profile': duelResult && duelResult.winner === duelResult.user2.username}">
+      
+      <div class="left-column">
+        <img [src]="duelResult.user2.avatar_url" alt="User Avatar" class="avatar" />
+        <p class="bio">{{ duelResult.user2.bio }}</p>
+      </div>
+      <div class="right-column">
+        <ul>
+          <li><strong>Username:</strong> {{ duelResult.user2.username }}</li>
+          <li><strong>Name:</strong> {{ duelResult.user2.name }}</li>
+          <li><strong>Location:</strong> {{ duelResult.user2.location || 'Not specified' }}</li>
+          <li><strong>Titles:</strong> {{ duelResult.user2.titles?.join(', ') || 'None' }}</li>
+          <li><strong>Favorite Language:</strong> {{ duelResult.user2['favorite-language'] || 'Not specified' }}</li>
+          <li><strong>Total Stars:</strong> {{ duelResult.user2['total-stars'] }}</li>
+          <li><strong>Highest Star Count:</strong> {{ duelResult.user2['highest-starred'] }}</li>
+          <li [ngClass]="{'winner-entry': duelResult && duelResult.winner === duelResult.user2.username, 'other-entry': duelResult && duelResult.winner !== duelResult.user2.username}">
+            <strong>Public Repositories:</strong> {{ duelResult.user2['public-repos'] || 0 }}</li>
+          <li><strong>Perfect Repositories:</strong> {{ duelResult.user2['perfect-repos'] }}</li>
+          <li><strong>Followers:</strong> {{ duelResult.user2.followers }}</li>
+          <li><strong>Following:</strong> {{ duelResult.user2.following }}</li>
+        </ul>
+      </div>
+    </div>
+    </div>
+    </div>
+

@@ -1,0 +1,29 @@
+<div style="display: flex; flex-direction: column; align-items: center; margin-top: 20vh;">
+  <app-text-input (usernameChange)="receiveUsername($event)"></app-text-input>
+  <br />
+  <br />
+  <button class="submit-button" (click)="onSubmit()">Inspect</button>
+
+  <div class="profile-container" *ngIf="userProfile">
+    <div class="left-column">
+      <img [src]="userProfile.avatar_url" alt="User Avatar" class="avatar" />
+      <p class="bio">{{ userProfile.bio }}</p>
+    </div>
+    <div class="right-column">
+      <ul>
+        <li><strong>Username:</strong> {{ userProfile.username }}</li>
+        <li><strong>Name:</strong> {{ userProfile.name }}</li>
+        <li><strong>Location:</strong> {{ userProfile.location || 'Not specified' }}</li>
+        <li><strong>Titles:</strong> {{ userProfile.titles?.join(', ') || 'None' }}</li>
+        <li><strong>Favorite Language:</strong> {{ userProfile['favorite-language'] || 'Not specified' }}</li>
+        <li><strong>Total Stars:</strong> {{ userProfile['total-stars'] }}</li>
+        <li><strong>Highest Star Count:</strong> {{ userProfile['highest-starred'] }}</li>
+        <li><strong>Public Repositories:</strong> {{ userProfile['public-repos'] || 0 }}</li>
+        <li><strong>Perfect Repositories:</strong> {{ userProfile['perfect-repos'] }}</li>
+        <li><strong>Followers:</strong> {{ userProfile.followers }}</li>
+        <li><strong>Following:</strong> {{ userProfile.following }}</li>
+      </ul>
+    </div>
+  </div>
+  <div *ngIf="error">{{ error }}</div>
+  </div>
